@@ -15,15 +15,15 @@ export default class World {
 		};
 	}
 
-	update() {
+	update(dt) {
 		for (let p of this.bullets) {
-			p.update();
+			p.update(dt);
 			this.removeOldBullets();
 		}
 		this.bulletCoolDown -= 1;
 
 		this.asteroidGen.collide(this.bullets, this.updateScore);
-		this.asteroidGen.update();
+		this.asteroidGen.update(dt);
 
 		if (this.asteroidGen.asteroids.length == 0) {
 			this.complexity += 1;

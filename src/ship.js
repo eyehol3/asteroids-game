@@ -16,12 +16,12 @@ export default class Ship {
 		drawTriangle(this.position.copy(), this.direction.copy());
 		circle(this.position.x, this.position.y, this.HITBOX_RADIUS);
 	}
-	update() {
+	update(dt) {
 		this.velocity.add(this.acceleration);
 		this.acceleration.mult(0.3);
 		this.velocity.mult(0.99);
 		this.velocity.limit(5);
-		this.position.add(this.velocity);
+		this.position.add(this.velocity.copy().mult(dt));
 		this.bounds();
 		this.detectCollision();
 	}

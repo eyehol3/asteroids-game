@@ -15,8 +15,8 @@ class Asteroid {
 		circle(this.position.x, this.position.y, this.radius());
 	}
 
-	update() {
-		this.position.add(this.direction.copy().limit(this.velocity));
+	update(dt) {
+		this.position.add(this.direction.copy().mult(dt).limit(this.velocity));
 		this.bounds();
 	}
 
@@ -58,10 +58,10 @@ export default class AsteroidGenerator {
 		this.asteroids.push(new Asteroid(position, size, direction, velocity));
 	}
 
-	update() {
+	update(dt) {
 		this.cleanup();
 		for (let a of this.asteroids) {
-			a.update();
+			a.update(dt);
 		}
 	}
 	cleanup() {

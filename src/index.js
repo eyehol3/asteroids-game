@@ -43,15 +43,14 @@ export default class Game {
 
 	update(time) {
 		this.handleKeys();
-		const dt = time - this.prevUpdateTime;
+		const dt = (time - this.prevUpdateTime) / 16;
 		this.prevUpdateTime = time;
 		this.ctx.fillStyle = "rgb(20, 20, 20)";
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-		// console.log("update!");
 
 		if (this.ship.isDead === false) {
-			this.ship.update();
-			this.world.update();
+			this.ship.update(dt);
+			this.world.update(dt);
 
 			this.draw();
 		} else {
@@ -61,7 +60,6 @@ export default class Game {
 		requestAnimationFrame((time) => this.update(time));
 	}
 	handleKeys() {
-		// console.log(keyCode);
 		if (keyIsDown("Space")) {
 			this.ship.boost();
 		}
@@ -84,22 +82,26 @@ export default class Game {
 	restartScreen() {
 		this.ctx.fillStyle = "rgb(200,200,200)";
 		this.ctx.font = "32px monospace";
-        this.ctx.textAlign = 'center';
-		this.ctx.fillText("score: " + this.world.score, this.width*0.5, this.height*0.2);
-		this.ctx.fillText("r to restart", this.width*0.5, this.height*0.5);
+		this.ctx.textAlign = "center";
+		this.ctx.fillText(
+			"score: " + this.world.score,
+			this.width * 0.5,
+			this.height * 0.2
+		);
+		this.ctx.fillText("r to restart", this.width * 0.5, this.height * 0.5);
 		this.ctx.fillText(
 			"x to shoot,\n space to boost, \nleft right to rotate",
-			this.width*0.5,
-			this.height*0.7
+			this.width * 0.5,
+			this.height * 0.7
 		);
 	}
-    restart(){
-        this.world.init();
-        this.ship = new Ship(
+	restart() {
+		this.world.init();
+		this.ship = new Ship(
 			new Vector(this.width / 2, this.height / 2),
 			this.world
 		);
-    }
+	}
 }
 
 new Game();

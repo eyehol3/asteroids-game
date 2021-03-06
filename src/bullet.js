@@ -7,8 +7,8 @@ export default class Bullet {
 		this.direction = direction.setMag(velocity);
 		this.ttl = canvas.width;
 	}
-	update() {
-		let vector = this.direction;
+	update(dt) {
+		let vector = this.direction.copy().mult(dt);
 		this.position.add(vector);
 		this.ttl -= vector.mag();
 	}
