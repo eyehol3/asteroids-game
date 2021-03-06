@@ -1,4 +1,11 @@
-``npm install`` <br>
-``npm run start`` for dev build or ``npm run production`` for prod build <br>
-open ``localhost:3000`` in your favorite browser <br>
+## [play](eyehol3.github.io/asteroids-game/)
+
+## controls
+x to shoot, space to boost, left right to rotate
+r to restart
+
+## build
+``npm install`` 
+``npm run start`` 
+open ``localhost:3000``
 have fun
