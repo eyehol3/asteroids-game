@@ -1,4 +1,4 @@
-## [play](eyehol3.github.io/asteroids-game/)
+## [play](https://eyehol3.github.io/asteroids-game/)
 
 ## controls
 x to shoot, space to boost, left right to rotate
