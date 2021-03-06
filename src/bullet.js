@@ -1,15 +1,11 @@
-import { circle } from "./draw";
+import { circle, canvas, ctx } from "./draw";
 const velocity = 6;
 
 export default class Bullet {
 	constructor(position, direction) {
 		this.position = position;
 		this.direction = direction.setMag(velocity);
-
-		this.canvas = document.getElementById("canvas");
-		this.ctx = this.canvas.getContext("2d");
-
-		this.ttl = this.canvas.width;
+		this.ttl = canvas.width;
 	}
 	update() {
 		let vector = this.direction;
@@ -17,15 +13,13 @@ export default class Bullet {
 		this.ttl -= vector.mag();
 	}
 	draw() {
-		this.ctx.fillStyle = "rgb(200,200,200)";
+		ctx.fillStyle = "rgb(200,200,200)";
 		circle(this.position.x, this.position.y, 4);
 		this.bounds();
 	}
 	bounds() {
-		this.position.x =
-			(this.position.x + this.canvas.width) % this.canvas.width;
-		this.position.y =
-			(this.position.y + this.canvas.height) % this.canvas.height;
+		this.position.x = (this.position.x + canvas.width) % canvas.width;
+		this.position.y = (this.position.y + canvas.height) % canvas.height;
 	}
 	destroy() {
 		this.isDead = true;

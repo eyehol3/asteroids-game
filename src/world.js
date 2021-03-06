@@ -1,6 +1,8 @@
 const newBulletCooldown = 20;
 import AsteroidGenerator from "./asteroids";
 import Bullet from "./bullet";
+import { canvas, ctx } from "./draw";
+
 export default class World {
 	constructor() {
 		this.complexity = 1;
@@ -11,9 +13,6 @@ export default class World {
 		this.updateScore = () => {
 			this.score += 20;
 		};
-
-		this.canvas = document.getElementById("canvas");
-		this.ctx = this.canvas.getContext("2d");
 	}
 
 	update() {
@@ -36,10 +35,10 @@ export default class World {
 		this.bullets = this.bullets.filter((p) => p.ttl > 0 && !p.isDead);
 	}
 	draw() {
-		this.ctx.fillStyle = "rgb(200,200,200)";
-		this.ctx.textAlign = "center";
-		this.ctx.font = "48px monospace";
-		this.ctx.fillText("score: " + this.score, this.canvas.width * 0.5, 50);
+		ctx.fillStyle = "rgb(200,200,200)";
+		ctx.textAlign = "center";
+		ctx.font = "48px monospace";
+		ctx.fillText("score: " + this.score, canvas.width * 0.5, 50);
 		for (let p of this.bullets) {
 			p.draw();
 		}

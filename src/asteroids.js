@@ -1,6 +1,6 @@
 import { random2D } from "./vectors";
 const [minVelocity, maxVelocity] = [1, 5];
-import { circle } from "./draw";
+import { circle, canvas, ctx } from "./draw";
 
 class Asteroid {
 	constructor(position, size, direction, velocity) {
@@ -8,13 +8,10 @@ class Asteroid {
 		this.size = size;
 		this.direction = direction;
 		this.velocity = velocity;
-
-		this.canvas = document.getElementById("canvas");
-		this.ctx = this.canvas.getContext("2d");
 	}
 	draw() {
-		this.ctx.fillStyle = "rgba(0,0,0,0)";
-		this.ctx.strokeStyle = "rgb(200,200,200)";
+		ctx.fillStyle = "rgba(0,0,0,0)";
+		ctx.strokeStyle = "rgb(200,200,200)";
 		circle(this.position.x, this.position.y, this.radius());
 	}
 
@@ -24,10 +21,8 @@ class Asteroid {
 	}
 
 	bounds() {
-		this.position.x =
-			(this.position.x + this.canvas.width) % this.canvas.width;
-		this.position.y =
-			(this.position.y + this.canvas.height) % this.canvas.height;
+		this.position.x = (this.position.x + canvas.width) % canvas.width;
+		this.position.y = (this.position.y + canvas.height) % canvas.height;
 	}
 
 	radius() {
@@ -52,7 +47,7 @@ export default class AsteroidGenerator {
 	}
 	newAsteroid(size, position) {
 		if (typeof position === "undefined") {
-			position = random2D();
+			position = random2D().setMag(Math.random() * canvas.width * 0.3);
 		}
 		let direction = random2D();
 		if (typeof size === "undefined") {

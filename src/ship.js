@@ -1,5 +1,5 @@
 import { Vector } from "./vectors";
-import { drawTriangle, circle } from "./draw";
+import { drawTriangle, circle, canvas, ctx } from "./draw";
 
 export default class Ship {
 	constructor(position, world) {
@@ -10,12 +10,9 @@ export default class Ship {
 		this.HITBOX_RADIUS = 3;
 		this.world = world;
 		this.isDead = false;
-
-		this.canvas = document.getElementById("canvas");
-		this.ctx = canvas.getContext("2d");
 	}
 	draw() {
-		this.ctx.fillStyle = "rgb(200,200,200)";
+		ctx.fillStyle = "rgb(200,200,200)";
 		drawTriangle(this.position.copy(), this.direction.copy());
 		circle(this.position.x, this.position.y, this.HITBOX_RADIUS);
 	}
@@ -30,10 +27,8 @@ export default class Ship {
 	}
 
 	bounds() {
-		this.position.x =
-			(this.position.x + this.canvas.width) % this.canvas.width;
-		this.position.y =
-			(this.position.y + this.canvas.height) % this.canvas.height;
+		this.position.x = (this.position.x + canvas.width) % canvas.width;
+		this.position.y = (this.position.y + canvas.height) % canvas.height;
 	}
 
 	boost() {
